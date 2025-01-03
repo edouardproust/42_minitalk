@@ -1,0 +1,10 @@
+*.o
+*.a
+server
+client
+*.swo
+*.swp
+.gitignore
+subject
+README.md
+test

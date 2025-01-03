@@ -1,0 +1,9 @@
+_*
+*.pdf
+*.swo
+*.swp
+*.a
+*.o
+*.out 
+*test*
+subject

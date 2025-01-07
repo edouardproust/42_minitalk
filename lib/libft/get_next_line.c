@@ -6,23 +6,19 @@
 /*   By: eproust <contact@edouardproust.dev>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 19:15:14 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/20 17:50:15 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/07 14:12:21 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*fill_stash(char **stash, int fd)
+static char	*read_into_stash(int fd, char *buffer, char **stash)
 {
-	char	*buffer;
 	int		br;
+	char	*new_stash;
 
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (free_ptrs(1, stash));
-	buffer[0] = '\0';
 	br = 1;
-	while (!ft_strchr(buffer, '\n') && br != 0)
+	while (!ft_strchr(*stash, '\n') && br != 0)
 	{
 		br = read(fd, buffer, BUFFER_SIZE);
 		if (br < 0)
@@ -30,16 +26,18 @@ static char	*fill_stash(char **stash, int fd)
 		if (br > 0)
 		{
 			buffer[br] = '\0';
-			*stash = ft_strjoin(*stash, buffer);
-			if (!*stash)
-				return (free_ptrs(1, &buffer));
+			new_stash = ft_strjoin(*stash, buffer);
+			if (!new_stash)
+				return (free_ptrs(2, &buffer, stash));
+			free(*stash);
+			*stash = new_stash;
 		}
 	}
 	free_ptrs(1, &buffer);
 	return (*stash);
 }
 
-static char	*set_line(char **stash)
+static char	*extract_line_from_stash(char **stash)
 {
 	char	*line;
 	int		i;
@@ -57,10 +55,10 @@ static char	*set_line(char **stash)
 	return (line);
 }
 
-static char	*update_stash(int line_len, char **stash)
+static char	*cleanup_stash_after_extract(char **stash, int line_len)
 {
-	int		len;
 	char	*tmp;
+	int		len;
 
 	len = ft_strlen(*stash);
 	if (len == line_len)
@@ -73,16 +71,21 @@ static char	*update_stash(int line_len, char **stash)
 char	*get_next_line(int fd)
 {
 	static char	*stash[1024];
+	char		*buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stash[fd] = fill_stash(&stash[fd], fd);
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (free_ptrs(1, &stash[fd]));
+	buffer[0] = '\0';
+	stash[fd] = read_into_stash(fd, buffer, &stash[fd]);
 	if (!stash[fd])
 		return (NULL);
-	line = set_line(&stash[fd]);
+	line = extract_line_from_stash(&stash[fd]);
 	if (!line)
 		return (NULL);
-	stash[fd] = update_stash(ft_strlen(line), &stash[fd]);
+	stash[fd] = cleanup_stash_after_extract(&stash[fd], ft_strlen(line));
 	return (line);
 }

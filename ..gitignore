@@ -4,7 +4,9 @@ server
 client
 *.swo
 *.swp
+*.bak
 .gitignore
 subject
 README.md
 test
+obj

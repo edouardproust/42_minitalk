@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:41:42 by eproust           #+#    #+#             */
-/*   Updated: 2024/12/20 17:54:43 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/07 14:16:03 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	while (s2[j])
 		join[i++] = s2[j++];
 	join[i] = '\0';
-	if (s1)
-		free_ptrs(1, &s1);
 	return (join);
 }
 

@@ -2,11 +2,13 @@
 *.a
 server
 client
+server_bonus
+client_bonus
 *.swo
 *.swp
 *.bak
 .gitignore
 subject
 README.md
-test
 obj
+screenshots

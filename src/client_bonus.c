@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:49:34 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/08 15:32:12 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:18:32 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int ac, char **av)
 	int					server_pid;
 
 	if (ac != 3)
-		ft_error("Usage: ./client <server PID> <message>\n");
+		ft_error("Usage: ./client_bonus <server PID> <message>\n");
 	server_pid = ft_atoi(av[1]);
 	if (server_pid == 0 || server_pid == -1)
 		ft_error("Incorrect server PID\n");

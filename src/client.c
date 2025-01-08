@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:49:34 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/08 15:24:33 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/08 15:56:28 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	send_message(int server_pid, char *msg)
 			if ((msg[i] >> j) & 1)
 				signal = SIGUSR2;
 			else
-				signal = SIGUSR2;
+				signal = SIGUSR1;
 			if (kill(server_pid, signal) == -1)
 				ft_error("Failed to send bit to server\n");
 			while (!g_bit_received)

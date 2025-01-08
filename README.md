@@ -71,7 +71,7 @@ The bonus part of this project adds the following features:
 	```
 	Replace `<server_PID>` by the PID previously displayed by the server.
 
-4. **Bonus: stress test**
+4. **Stress test**
 	```
 	content=$(for i in {1..100}; do cat test/unicode; done) && ./client_bonus <server_PID> "$content"
 	```

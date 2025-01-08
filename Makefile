@@ -33,7 +33,7 @@ OBJS_CL_BONUS = $(addprefix $(OBJ_DIR)/,$(C_FILES_CL_BONUS:.c=.o))
 
 #======================== HEADERS =============================#
 
-H_DIR = .
+H_DIR = include
 
 H_FILES = minitalk.h
 

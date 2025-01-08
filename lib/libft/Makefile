@@ -6,6 +6,7 @@ SRCS = free_matrix.c \
 	ft_atol.c \
 	ft_bzero.c \
 	ft_calloc.c \
+	ft_error.c \
 	ft_isalnum.c \
 	ft_isalpha.c \
 	ft_isascii.c \

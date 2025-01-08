@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 12:55:09 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/03 15:46:43 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/08 11:47:22 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
+# define STDERR_FILENO 2
+
 /* String */
+void	ft_error(char *error_msg);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

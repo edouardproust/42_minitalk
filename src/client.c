@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:49:34 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/08 12:13:12 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/08 15:24:33 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	send_message(int server_pid, char *msg)
 	size_t	len;
 	size_t	i;
 	int		j;
-	int		bit;
+	int		signal;
 
 	len = ft_strlen(msg);
 	i = -1;
@@ -34,12 +34,11 @@ static void	send_message(int server_pid, char *msg)
 		j = -1;
 		while (++j < 8)
 		{
-			bit = (msg[i] >> j) & 1;
-			if (bit == 0)
-				bit = SIGUSR1;
-			else if (bit == 1)
-				bit = SIGUSR2;
-			if (kill(server_pid, bit) == -1)
+			if ((msg[i] >> j) & 1)
+				signal = SIGUSR2;
+			else
+				signal = SIGUSR2;
+			if (kill(server_pid, signal) == -1)
 				ft_error("Failed to send bit to server\n");
 			while (!g_bit_received)
 				pause();

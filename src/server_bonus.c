@@ -6,7 +6,7 @@
 /*   By: eproust <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:49:34 by eproust           #+#    #+#             */
-/*   Updated: 2025/01/08 13:53:26 by eproust          ###   ########.fr       */
+/*   Updated: 2025/01/08 15:30:36 by eproust          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	signal_handler(int signal, siginfo_t *info, void *context)
 {
-	static uint32_t	c = 0;
-	static int		bit_count = 0;
+	static char	c = 0;
+	static int	bit_count = 0;
 
 	(void)context;
 	if (signal == SIGUSR1)
@@ -25,16 +25,14 @@ static void	signal_handler(int signal, siginfo_t *info, void *context)
 	bit_count++;
 	if (kill(info->si_pid, SIGUSR1) == -1)
 		ft_error("Failed to send bit confirmation to client\n");
-	if (bit_count == 32)
+	if (bit_count == 8)
 	{
 		if (c == 0)
 		{
 			c = '\n';
+			usleep(100);
 			if (kill(info->si_pid, SIGUSR2) == -1)
-			{
 				ft_error("Failed to send message confirmation to client\n");
-				ft_printf("OK\n");
-			}
 		}
 		write(STDOUT_FILENO, &c, 1);
 		c = 0;

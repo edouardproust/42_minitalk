@@ -61,7 +61,7 @@ all: libft $(SERVER) $(CLIENT)
 
 bonus: libft $(SERVER_BONUS) $(CLIENT_BONUS)
 
-$(OBJ_DIR)/%.o: $(C_DIR)/%.c Makefile $(HEADERS)
+$(OBJ_DIR)/%.o: $(C_DIR)/%.c Makefile $(HEADERS) $(LIBFT)
 	@mkdir -p $(OBJ_DIR)
 	cc $(CFLAGS) -c $< -o $@ $(INCLUDES)
 

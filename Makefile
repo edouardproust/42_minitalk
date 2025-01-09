@@ -92,5 +92,4 @@ re: fclean all
 
 #======================== PHONY ===============================#
 
-.PHONY: all libft clean fclean re
-
+.PHONY: all bonus libft clean fclean re

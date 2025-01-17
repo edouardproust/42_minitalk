@@ -86,7 +86,7 @@ clean:
 
 fclean: clean
 	rm -f $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(LIBFT)
 
 re: fclean all
 
